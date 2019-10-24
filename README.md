@@ -20,31 +20,16 @@ yarn add markdown-it-custom-header-link
 module.exports = {
   markdown: {
     plugins: [
-      ['markdown-it-custom-header-link']
+      [require('markdown-it-custom-header-link')]
     ]
   }
 }
 ```
-or
-
-```js
-module.exports = {
-  markdown: {
-    plugins: {
-      'markdown-it-custom-header-link': {}
-    }
-  }
-}
-
-```
 
 ### Using
 
-In markdown file page.md add the header
+Add a header to the markdown file `page.md` 
 ```
 ## my header <!-- link -->
 ```
-This header is available at the url
-```
-localhost:8080/page/#link 
-```
+This header is available at the url: `localhost:8080/page/#link` 
