@@ -1,6 +1,5 @@
 const slugify = (s) => encodeURIComponent(String(s).trim().toLowerCase().replace(/\s+/g, '-'))
 
-
 const hasProp = Object.prototype.hasOwnProperty
 
 const uniqueSlug = (slug, slugs) => {
@@ -11,53 +10,53 @@ const uniqueSlug = (slug, slugs) => {
   return uniq
 }
 
-function addquote(str) {
-  return str.replace(/([$-/:-?{-~!"^_`\[\]])/g, "\\$1")
-};
+function addquote (str) {
+  return str.replace(/([$-/:-?{-~!"^_`\[\]])/g, '\\$1')
+}
 
-const header_link = (md, opts) => {
-  opts = Object.assign({}, header_link.defaults, opts)
+const headerLink = (md, opts) => {
+  opts = Object.assign({}, headerLink.defaults, opts)
 
-  md.core.ruler.before('linkify', 'header_link', state => {
+  md.core.ruler.before('linkify', 'headerLink', state => {
     const slugs = {}
     const tokens = state.tokens
 
-    let quotes = opts.quotes.replace(/\s+/g, ' ');
-    const isHtmlComments = quotes === header_link.defaults.quotes;
-    quotes = quotes.split(" ");
-    if (quotes.length !== 2) throw new Error("Invalid quotes");
+    let quotes = opts.quotes.replace(/\s+/g, ' ')
+    const isHtmlComments = quotes === headerLink.defaults.quotes
+    quotes = quotes.split(' ')
+    if (quotes.length !== 2) throw new Error('Invalid quotes')
 
-    const regex = new RegExp(addquote(quotes[0]) + "\\s*\\S+\\s*" + addquote(quotes[1]), "s");
+    const regex = new RegExp(addquote(quotes[0]) + '\\s*\\S+\\s*' + addquote(quotes[1]), 's')
 
     tokens
       .filter(token => token.type === 'heading_open')
       .forEach(token => {
         // Aggregate the next token children text.
         let slug = token.attrGet('id')
-        if (true || slug == null) {
+        if (slug == null) {
           tokens[tokens.indexOf(token) + 1].children.filter(t => {
-            if (t.type === 'text' || t.type === 'code_inline' || (isHtmlComments && t.type === 'html_inline')) {
-              let content = t.content;
-              if (slug == null) slug = content.match(regex);
+            if ((isHtmlComments && t.type === 'html_inline') || (!isHtmlComments && (t.type === 'text' || t.type === 'code_inline'))) {
+              let content = t.content
+              if (slug == null) slug = content.match(regex)
               if (slug) {
-                slug = slug[0];
-                t.content = t.content.replace(slug, "").trim();
-                slug = slug.substring(quotes[0].length, slug.length - quotes[1].length).trim();
+                slug = slug[0]
+                t.content = t.content.replace(slug, '').trim()
+                slug = slug.substring(quotes[0].length, slug.length - quotes[1].length).trim()
                 slug = uniqueSlug(opts.slugify(slug), slugs)
                 token.attrPush(['id', slug])
               }
-              return true;
+              return true
             };
-            return false;
+            return false
           })
         }
       })
   })
 }
 
-header_link.defaults = {
+headerLink.defaults = {
   slugify,
-  quotes: "<!-- -->"
+  quotes: '<!-- -->',
 }
 
-module.exports = header_link
+module.exports = headerLink

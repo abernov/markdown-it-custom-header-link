@@ -33,3 +33,7 @@ Add a header to the markdown file `page.md`
 ## my header <!-- link -->
 ```
 This header is available at the url: `localhost:8080/page/#link` 
+
+### Incompatibility
+
+Vuepress `[[toc]]` will give incorrect links. Problem in vuepress plugin [markdown-it-table-of-contents](https://github.com/Oktavilla/markdown-it-table-of-contents)
