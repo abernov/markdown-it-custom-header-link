@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-custom-header-link",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "src/index.js",
   "description": "A markdown-it plugin for VuePress which created custom header links.",
   "author": "abernov <abernov@mail.ru>",
@@ -17,13 +17,13 @@
     "lint": "eslint . --fix"
   },
   "devDependencies": {
-    "eslint": "^5.15.1",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^5.2.2"
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^6.2.2"
   },
   "dependencies": {},
   "keywords": [
